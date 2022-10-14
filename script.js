@@ -38,16 +38,17 @@ function dragend() {
 /** place where we will drop cards */
 dropzones.forEach( dropzone => {
     dropzone.addEventListener('dragenter', dragenter)
-    dropzone.addEventListener('dragover', dragover)
+    dropzone.addEventListener('dragover', event => dragover(event))
     dropzone.addEventListener('dragleave', dragleave)
-    dropzone.addEventListener('drop', drop)
+    dropzone.addEventListener('drop', event => drop(event))
 })
 
 function dragenter() {
     // log('DROPZONE: Enter in zone ')
 }
 
-function dragover() {
+function dragover(event) {
+    event.preventDefault()
     // this = dropzone
     this.classList.add('over')
 
@@ -65,7 +66,8 @@ function dragleave() {
 
 }
 
-function drop() {
+function drop(event) {
+    event.preventDefault()
     // log('DROPZONE: dropped ')
     this.classList.remove('over')
 }
